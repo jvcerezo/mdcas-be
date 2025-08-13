@@ -35,10 +35,16 @@ app.get('/', (req, res) => {
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
+const authMiddleware = require('./middlewares/authMiddleware');
 
 // Use routes
 app.use('/api/auth', authRoutes);
 app.use('/api/appointments', appointmentRoutes);
+
+// Protected route example
+app.use('/api/protected', authMiddleware, (req, res) => {
+  res.json({ message: 'This is a protected route.', user: req.user });
+});
 
 // Start the server
 app.listen(PORT, () => {
