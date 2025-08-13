@@ -1,12 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
+app.use(cors()); // Enable CORS
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
@@ -20,6 +22,14 @@ mongoose.connect(process.env.MONGO_URI, {
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
+
+// Import routes
+const authRoutes = require('./routes/authRoutes');
+const appointmentRoutes = require('./routes/appointmentRoutes');
+
+// Use routes
+app.use('/api/auth', authRoutes);
+app.use('/api/appointments', appointmentRoutes);
 
 // Start the server
 app.listen(PORT, () => {
