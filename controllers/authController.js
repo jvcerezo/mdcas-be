@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 // Register a new user
-exports.register = async (req, res) => {
+exports.signup= async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
@@ -20,7 +20,7 @@ exports.register = async (req, res) => {
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
 
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: 'User signed up successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
   }
@@ -48,6 +48,7 @@ exports.login = async (req, res) => {
 
     res.status(200).json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error });
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
