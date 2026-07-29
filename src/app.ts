@@ -25,7 +25,27 @@ export function createApp() {
 
   // In development the Vite dev server may come up on 5173 or 5174, so allow
   // any localhost port. In production only the configured origins are allowed.
-  const allowed = new Set(env.allowedOrigins);
+  // FRONTEND_URL entries may contain a `*` wildcard in the hostname. This
+  // exists for preview deployments: Vercel gives every commit its own URL
+  // (mdcas-fe-abc123-you.vercel.app), so an exact-match list would reject every
+  // preview build while production kept working — a confusing failure that
+  // looks like the API is down.
+  //
+  // Keep wildcards narrow. `https://*.vercel.app` trusts anything on that
+  // domain, including other people's projects, so use it for previews only and
+  // list the production domain explicitly.
+  const exactOrigins = new Set(env.allowedOrigins.filter((origin) => !origin.includes('*')));
+  const wildcardOrigins = env.allowedOrigins
+    .filter((origin) => origin.includes('*'))
+    .map(
+      (pattern) =>
+        new RegExp(
+          `^${pattern
+            .replace(/[.+?^${}()|[\]\\]/g, '\\$&') // escape regex metacharacters
+            .replace(/\*/g, '[^.]+')}$`, // `*` matches one hostname label
+        ),
+    );
+
   app.use(
     cors({
       origin(origin, callback) {
@@ -33,7 +53,10 @@ export function createApp() {
         if (!origin) return callback(null, true);
 
         const normalized = origin.replace(/\/$/, '');
-        if (allowed.has(normalized)) return callback(null, true);
+        if (exactOrigins.has(normalized)) return callback(null, true);
+        if (wildcardOrigins.some((pattern) => pattern.test(normalized))) {
+          return callback(null, true);
+        }
         if (!env.isProduction && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(normalized)) {
           return callback(null, true);
         }
