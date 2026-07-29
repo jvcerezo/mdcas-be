@@ -4,9 +4,22 @@
  * ============================================================================
  *
  * STATUS OF THIS DATA
- *   REAL         — the three branch names and their locations in Los Baños.
- *   PLACEHOLDER  — street addresses, phone numbers, emails, opening hours,
- *                  staff, services and prices. Replace before going live.
+ *   REAL         — the three branch names, and the Bayog street address
+ *                  (sourced from public listings — still worth verifying).
+ *   PLACEHOLDER  — the other two street addresses, all phone numbers, emails,
+ *                  opening hours, staff, services and prices.
+ *
+ * MAP PINS
+ *   `coordinates` is intentionally UNSET on every branch. Do not invent
+ *   values: a wrong pin on a clinic site sends a patient in pain to the wrong
+ *   building, which is worse than showing no pin at all. Until it is set, the
+ *   site geocodes the street address instead, so the pin is only ever as
+ *   accurate as the address above it.
+ *
+ *   To set a real pin: open the branch in Google Maps, right-click it, click
+ *   the latitude/longitude pair to copy, then add
+ *       coordinates: { lat: 14.1699, lng: 121.2417 },
+ *   to that clinic. The map switches to an exact marker automatically.
  *
  * This is the SINGLE source of truth for every clinic, service and staff
  * member on the site. Nothing else in either repo hardcodes this content.
@@ -263,16 +276,16 @@ const clinics: ContentSet['clinics'] = [
     isMainBranch: true,
     yearEstablished: 1998,
     address: {
-      line1: 'National Highway',
-      line2: 'Maralit Building, 2nd Floor',
+      // Sourced from public listings (Waze / Cybo). Verify before launch.
+      line1: '4094 Ibarang Road',
       barangay: 'Bayog',
       city: 'Los Baños',
       province: 'Laguna',
       postalCode: '4030',
       country: 'Philippines',
     },
-    coordinates: { lat: 14.1815, lng: 121.2192 },
-    mapUrl: 'https://maps.google.com/?q=Bayog+Los+Banos+Laguna',
+    // coordinates: paste the real pin here — see the note at the top of this file.
+    mapUrl: 'https://maps.google.com/?q=Maralit+Dental+Clinic+Bayog+Los+Banos',
     phone: '(049) 536 1234',
     mobile: '+63 917 555 0101',
     email: 'bayog@maralitdental.ph',
@@ -320,8 +333,8 @@ const clinics: ContentSet['clinics'] = [
       postalCode: '4030',
       country: 'Philippines',
     },
-    coordinates: { lat: 14.1668, lng: 121.2413 },
-    mapUrl: 'https://maps.google.com/?q=F.O.+Santos+Street+Los+Banos+Laguna',
+    // coordinates: paste the real pin here — see the note at the top of this file.
+    mapUrl: 'https://maps.google.com/?q=Maralit+Dental+Clinic+F.O.+Santos+Los+Banos',
     phone: '(049) 536 7788',
     mobile: '+63 917 555 0202',
     email: 'fosantos@maralitdental.ph',
@@ -384,8 +397,8 @@ const clinics: ContentSet['clinics'] = [
       postalCode: '4030',
       country: 'Philippines',
     },
-    coordinates: { lat: 14.1795, lng: 121.2211 },
-    mapUrl: 'https://maps.google.com/?q=Los+Banos+Junction+Laguna',
+    // coordinates: paste the real pin here — see the note at the top of this file.
+    mapUrl: 'https://maps.google.com/?q=Maralit+Dental+Clinic+Junction+Los+Banos',
     phone: '(049) 536 2299',
     mobile: '+63 917 555 0303',
     email: 'junction@maralitdental.ph',
