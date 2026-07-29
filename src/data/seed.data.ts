@@ -4,22 +4,22 @@
  * ============================================================================
  *
  * STATUS OF THIS DATA
- *   REAL         — the three branch names, and the Bayog street address
- *                  (sourced from public listings — still worth verifying).
- *   PLACEHOLDER  — the other two street addresses, all phone numbers, emails,
- *                  opening hours, staff, services and prices.
+ *   REAL         — the three branch names, and the map coordinates for all
+ *                  three, taken from the clinic's own Google Maps listings.
+ *   PLACEHOLDER  — street addresses (except Bayog, sourced from public
+ *                  listings), all phone numbers, emails, opening hours,
+ *                  staff, services and prices.
  *
  * MAP PINS
- *   `coordinates` is intentionally UNSET on every branch. Do not invent
- *   values: a wrong pin on a clinic site sends a patient in pain to the wrong
- *   building, which is worse than showing no pin at all. Until it is set, the
- *   site geocodes the street address instead, so the pin is only ever as
- *   accurate as the address above it.
+ *   Never invent `coordinates`. A wrong pin on a clinic site sends a patient
+ *   in pain to the wrong building, which is worse than showing no pin at all.
+ *   Leave it unset and the site geocodes the street address instead, labelling
+ *   the result as approximate.
  *
- *   To set a real pin: open the branch in Google Maps, right-click it, click
- *   the latitude/longitude pair to copy, then add
- *       coordinates: { lat: 14.1699, lng: 121.2417 },
- *   to that clinic. The map switches to an exact marker automatically.
+ *   To set or correct a pin: open the branch in Google Maps, right-click it,
+ *   click the latitude/longitude pair to copy, then set
+ *       coordinates: { lat: 14.1905088, lng: 121.2454488 },
+ *   The map switches to an exact marker automatically.
  *
  * This is the SINGLE source of truth for every clinic, service and staff
  * member on the site. Nothing else in either repo hardcodes this content.
@@ -284,8 +284,9 @@ const clinics: ContentSet['clinics'] = [
       postalCode: '4030',
       country: 'Philippines',
     },
-    // coordinates: paste the real pin here — see the note at the top of this file.
-    mapUrl: 'https://maps.google.com/?q=Maralit+Dental+Clinic+Bayog+Los+Banos',
+    // Real pin, from the clinic's own Google Maps listing.
+    coordinates: { lat: 14.1905088, lng: 121.2454488 },
+    mapUrl: 'https://maps.app.goo.gl/bhF9YZZT7LCFVhYz8',
     phone: '(049) 536 1234',
     mobile: '+63 917 555 0101',
     email: 'bayog@maralitdental.ph',
@@ -333,8 +334,9 @@ const clinics: ContentSet['clinics'] = [
       postalCode: '4030',
       country: 'Philippines',
     },
-    // coordinates: paste the real pin here — see the note at the top of this file.
-    mapUrl: 'https://maps.google.com/?q=Maralit+Dental+Clinic+F.O.+Santos+Los+Banos',
+    // Real pin, from the clinic's own Google Maps listing.
+    coordinates: { lat: 14.1694746, lng: 121.2427779 },
+    mapUrl: 'https://maps.app.goo.gl/ncXjT8epXCz5ztp2A',
     phone: '(049) 536 7788',
     mobile: '+63 917 555 0202',
     email: 'fosantos@maralitdental.ph',
@@ -397,8 +399,9 @@ const clinics: ContentSet['clinics'] = [
       postalCode: '4030',
       country: 'Philippines',
     },
-    // coordinates: paste the real pin here — see the note at the top of this file.
-    mapUrl: 'https://maps.google.com/?q=Maralit+Dental+Clinic+Junction+Los+Banos',
+    // Real pin, from the clinic's own Google Maps listing.
+    coordinates: { lat: 14.1785309, lng: 121.2422929 },
+    mapUrl: 'https://maps.app.goo.gl/ReDnHiCuR9oM1u9x8',
     phone: '(049) 536 2299',
     mobile: '+63 917 555 0303',
     email: 'junction@maralitdental.ph',
