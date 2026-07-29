@@ -65,7 +65,7 @@ export interface GeoPoint {
 export interface Clinic {
   slug: string;
   name: string;
-  /** Short branch label used in compact UI, e.g. "Tanauan". */
+  /** Short branch label used in compact UI, e.g. "Bayog". */
   shortName: string;
   tagline: string;
   description: string;

@@ -170,7 +170,7 @@ export const listAppointments = asyncHandler(
     });
 
     // Without an explicit branch filter, narrow to the branches this account
-    // covers so a Santo Tomas front desk never sees Lipa's patients.
+    // covers so a Junction Rd. front desk never sees F.O. Santos' patients.
     if (!requestedClinic) {
       results = results.filter((item) => canAccessClinic(user, item.clinicSlug));
     }

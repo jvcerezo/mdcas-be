@@ -59,7 +59,7 @@ const NOTE_TEMPLATES = [
   'HMO approval already on file.',
   'First visit — needs full charting.',
   'Requested the same dentist as last time.',
-  'Running late is likely; patient commutes from Batangas City.',
+  'Running late is likely; patient commutes from Calamba.',
   'Nervous patient — allow extra chair time.',
   '',
   '',
